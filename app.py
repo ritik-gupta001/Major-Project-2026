@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
@@ -11,18 +14,14 @@ import PyPDF2
 import io
 import os
 from typing import Optional
-from dotenv import load_dotenv
 from pathlib import Path
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="MediSure AI", 
+    title="VitaScan AI", 
     description="Advanced AI-Powered Medical Report Analysis API with LLM and RAG",
     version="2.0.0"
 )
@@ -74,7 +73,7 @@ def extract_text_from_pdf(pdf_content):
 @app.get("/")
 async def root():
     return {
-        "message": "MediSure AI - Advanced Medical Report Analysis API", 
+        "message": "VitaScan AI - Advanced Medical Report Analysis API", 
         "status": "running",
         "version": "2.0.0",
         "features": ["LLM Analysis", "RAG Support", "AI Chatbot", "Medical Knowledge Base"]
@@ -136,11 +135,13 @@ async def analyze_document(file: UploadFile = File(...), use_llm: bool = True):
         
         logger.info("Analysis completed successfully")
         
+        analysis_type = "LLM-powered" if analysis_result.get("ai_powered") else "Rule-based"
+
         return JSONResponse(content={
             "success": True,
             "filename": file.filename,
             "analysis": analysis_result,
-            "analysis_type": "LLM-powered" if use_llm else "Rule-based"
+            "analysis_type": analysis_type
         })
         
     except HTTPException:
@@ -171,11 +172,13 @@ async def analyze_text(request: TextAnalysisRequest):
         
         logger.info("Text analysis completed successfully")
         
+        analysis_type = "LLM-powered" if analysis_result.get("ai_powered") else "Rule-based"
+
         return JSONResponse(content={
             "success": True,
             "filename": filename,
             "analysis": analysis_result,
-            "analysis_type": "LLM-powered" if use_llm else "Rule-based"
+            "analysis_type": analysis_type
         })
         
     except Exception as e:

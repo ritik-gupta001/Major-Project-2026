@@ -9,6 +9,16 @@ import MedicalReportPDF from './MedicalReportPDF';
 import { useTheme } from '../contexts/ThemeContext';
 import apiService from '../services/api';
 
+const hexToRgba = (hex, alpha = 1) => {
+  const value = hex.replace('#', '');
+  const normalized = value.length === 3 ? value.split('').map(ch => ch + ch).join('') : value;
+  const intVal = parseInt(normalized, 16);
+  const r = (intVal >> 16) & 255;
+  const g = (intVal >> 8) & 255;
+  const b = intVal & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
 const Dashboard = ({ analysis, onNewUpload, onDemo, loading, error }) => {
   const { currentColors } = useTheme();
   const [activeTab, setActiveTab] = useState('overview');
@@ -64,7 +74,7 @@ const Dashboard = ({ analysis, onNewUpload, onDemo, loading, error }) => {
       {/* Left Sidebar */}
       <div style={{
         width: '320px',
-        background: `rgba(${currentColors.surface.slice(1)}, 0.95)`,
+        background: hexToRgba(currentColors.surface, 0.94),
         backdropFilter: 'blur(10px)',
         borderRight: `1px solid ${currentColors.border}`,
         boxShadow: `4px 0 24px ${currentColors.shadow}`,
@@ -94,12 +104,12 @@ const Dashboard = ({ analysis, onNewUpload, onDemo, loading, error }) => {
                 fontWeight: 'bold', 
                 color: currentColors.text.primary, 
                 margin: 0,
-                background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
+                background: 'linear-gradient(135deg, #0f766e 0%, #2dd4bf 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
-                MediSure AI
+                VitaScan AI
               </h2>
               <p style={{fontSize: '0.8rem', color: currentColors.text.secondary, margin: 0}}>
                 🏥 Advanced Medical Analysis Platform
@@ -139,7 +149,7 @@ const Dashboard = ({ analysis, onNewUpload, onDemo, loading, error }) => {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '8px 16px',
-                background: MedicalGradients.primary,
+                background: 'linear-gradient(135deg, #0f766e 0%, #14b8a6 100%)',
                 color: 'white',
                 borderRadius: '6px',
                 cursor: loading ? 'not-allowed' : 'pointer',
@@ -162,7 +172,7 @@ const Dashboard = ({ analysis, onNewUpload, onDemo, loading, error }) => {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '8px 16px',
-                background: MedicalGradients.success,
+                background: 'linear-gradient(135deg, #2563eb 0%, #60a5fa 100%)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '6px',
@@ -369,10 +379,10 @@ const Dashboard = ({ analysis, onNewUpload, onDemo, loading, error }) => {
           }}>
             <MedicalIcons.Brain />
             <h2 style={{fontSize: '2rem', color: '#1f2937', marginTop: '20px'}}>
-              Welcome to MediSure AI
+              Welcome to VitaScan AI
             </h2>
             <p style={{fontSize: '1.1rem', color: '#6b7280', marginTop: '12px'}}>
-              Upload a medical report or try our demo to get started with intelligent medical analysis
+              Upload a medical report or try the demo to start your AI-powered health analysis
             </p>
           </div>
         )}

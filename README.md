@@ -1,10 +1,10 @@
-# 🏥 MediSure AI
+# 🏥 VitaScan AI
 
 **Advanced AI-Powered Medical Report Analysis Platform**
 
 A comprehensive medical document analysis system that leverages OpenAI GPT-4o-mini and advanced AI to transform medical reports into actionable insights. Features dynamic risk calculation, hospital-grade animations, and a beautiful teal-themed interface.
 
-![MediSure AI](https://img.shields.io/badge/React-18.2.0-blue?logo=react)
+![VitaScan AI](https://img.shields.io/badge/React-18.2.0-blue?logo=react)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green?logo=fastapi)
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-purple?logo=openai)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
@@ -54,8 +54,8 @@ A comprehensive medical document analysis system that leverages OpenAI GPT-4o-mi
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/ritik-gupta001/Medisure.AI.git
-cd Medisure.AI
+git clone https://github.com/ritik-gupta001/Major-Project-2026.git
+cd Major-Project-2026
 ```
 
 ### 2️⃣ Backend Setup
@@ -173,7 +173,7 @@ Once both servers are running:
 ## 📁 Project Structure
 
 ```
-MediSure AI/
+VitaScan AI/
 ├── app.py                      # FastAPI backend server
 ├── intelligent_analyzer.py     # Rule-based medical analyzer
 ├── llm_analyzer.py            # AI-powered LLM analyzer
@@ -249,7 +249,7 @@ npm run build  # Creates optimized production build
 ## 📁 Project Structure
 
 ```
-MediSure AI/
+VitaScan AI/
 ├── 📄 README.md                    # Project documentation  
 ├── 🐍 app.py                       # FastAPI backend server
 ├── 🧠 intelligent_analyzer.py      # Core AI analysis engine
@@ -392,59 +392,14 @@ Health check endpoint
 - ** Access Control**: Role-based permissions system ready
 - ** Session Management**: Secure user session handling
 
-## 🚀 Deployment
+## 🚀 Local Development
 
-### Development
 ```bash
 # Backend
 python app.py
 
 # Frontend
 cd frontend && npm start
-```
-
-### Production with Zeabur
-
-MediSure AI is optimized for **Zeabur** deployment with pre-configured settings.
-
-#### Quick Deploy to Zeabur
-
-1. **Sign up at [zeabur.com](https://zeabur.com)** with your GitHub account
-
-2. **Create New Project** and select `ritik-gupta001/Medisure.AI`
-
-3. **Deploy Backend (FastAPI)**
-   - Zeabur auto-detects `.zeabur.json` and `zbpack.json`
-   - Click "Deploy"
-   - Add environment variables:
-     - `OPENAI_API_KEY` = your-openai-api-key
-     - `PORT` = 8000
-
-4. **Deploy Frontend (React)**
-   - Add new service in same project
-   - Select `frontend` directory
-   - Zeabur auto-detects `package.json`
-   - After backend is live, add:
-     - `REACT_APP_API_URL` = your-backend-zeabur-url
-
-5. **Access Your App**
-   - Backend: `https://your-backend.zeabur.app`
-   - Frontend: `https://your-frontend.zeabur.app`
-
-#### Deployment Files Included
-- `.zeabur.json` - Backend Zeabur configuration
-- `zbpack.json` - Build settings
-- `Procfile` - Process configuration
-- `frontend/.zeabur.json` - Frontend Zeabur configuration
-
-#### Alternative Deployment Options
-```bash
-# Backend with Uvicorn
-uvicorn app:app --host 0.0.0.0 --port 8000
-
-# Frontend build
-cd frontend
-npm run build
 ```
 
 ---
@@ -508,7 +463,7 @@ npm run test:e2e
 - [ ] 🌍 Multi-language support
 
 ### 🎯 **Phase 5: Production** (Planned)
-- [ ] ☁️ Cloud deployment and scaling
+- [ ] ☁️ Advanced scaling and optimization
 - [ ] 🔐 Enhanced security and HIPAA compliance
 - [ ] 🏥 Healthcare system integrations
 - [ ] 📊 Advanced analytics dashboard
@@ -589,7 +544,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - **Email**: rg409239@gmail.com
 - **GitHub**: [@ritik-gupta001](https://github.com/ritik-gupta001)
-- **Issues**: [GitHub Issues](https://github.com/ritik-gupta001/Medisure.AI/issues)
+- **Issues**: [GitHub Issues](https://github.com/ritik-gupta001/Major-Project-2026/issues)
 
 ---
 
@@ -604,7 +559,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## ⚠️ Medical Disclaimer
 
-**Important**: MediSure AI is designed as an assistive tool for healthcare professionals and is **not a substitute** for professional medical advice, diagnosis, or treatment. 
+**Important**: VitaScan AI is designed as an assistive tool for healthcare professionals and is **not a substitute** for professional medical advice, diagnosis, or treatment. 
 
 - Always consult with qualified healthcare providers for medical decisions
 - The AI analysis should be used in conjunction with, not as a replacement for, professional medical judgment
@@ -615,7 +570,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 <div align="center">
 
-### 🏥 MediSure AI - Transforming Healthcare Through Intelligent AI Analysis
+### 🏥 VitaScan AI - Transforming Healthcare Through Intelligent AI Analysis
 
 ![Healthcare](https://img.shields.io/badge/Healthcare-Innovation-brightgreen?style=for-the-badge&logo=medical-cross)
 ![AI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?style=for-the-badge&logo=openai)
@@ -626,6 +581,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 *Made with ❤️ by Ritik Gupta*
 
-[⭐ Star this repo](https://github.com/ritik-gupta001/Medisure.AI) | [🐛 Report Bug](https://github.com/ritik-gupta001/Medisure.AI/issues) | [💡 Request Feature](https://github.com/ritik-gupta001/Medisure.AI/issues)
+[⭐ Star this repo](https://github.com/ritik-gupta001/Major-Project-2026) | [🐛 Report Bug](https://github.com/ritik-gupta001/Major-Project-2026/issues) | [💡 Request Feature](https://github.com/ritik-gupta001/Major-Project-2026/issues)
 
 </div>

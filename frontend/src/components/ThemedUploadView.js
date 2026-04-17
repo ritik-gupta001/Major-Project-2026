@@ -39,19 +39,19 @@ const ThemedUploadView = ({ onUpload, loading, error, apiHealth, onDemo }) => {
           <h1 style={{
             fontSize: '2.5rem',
             fontWeight: 'bold',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             marginBottom: '10px'
           }}>
-            MediSure AI
+            VitaScan AI
           </h1>
           <p style={{
             fontSize: '1.2rem',
             color: currentColors.text.secondary,
             marginBottom: '10px'
           }}>
-            Advanced Medical Document Analysis with AI
+            Secure medical intelligence for modern care
           </p>
           {apiHealth && (
             <div style={{
@@ -60,8 +60,8 @@ const ThemedUploadView = ({ onUpload, loading, error, apiHealth, onDemo }) => {
               marginBottom: '20px'
             }}>
               {apiHealth.analyzers?.llm === 'ready' ? 
-                '🚀 AI-Powered Analysis Available' : 
-                '⚠️ Using Legacy Analysis (Configure API keys for AI features)'}
+                '🚀 AI analysis enabled' : 
+                '⚠️ Standard analysis active (add API key for AI mode)'}
             </div>
           )}
         </div>
@@ -109,7 +109,7 @@ const ThemedUploadView = ({ onUpload, loading, error, apiHealth, onDemo }) => {
               transition: 'all 0.2s'
             }}
           >
-            {loading ? 'Processing...' : 'Try Demo Report'}
+            {loading ? 'Processing...' : 'View Demo Experience'}
           </button>
         </div>
       </div>

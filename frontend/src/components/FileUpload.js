@@ -19,7 +19,6 @@ const FileUpload = ({ onUpload, isLoading = false, apiHealth = null }) => {
 
     if (acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
-      console.log('📁 File selected:', file.name, 'Size:', (file.size / 1024 / 1024).toFixed(2), 'MB');
       onUpload(file, analysisMode === 'llm');
     }
   }, [onUpload, analysisMode]);
@@ -47,7 +46,7 @@ const FileUpload = ({ onUpload, isLoading = false, apiHealth = null }) => {
     <div className="w-full space-y-4">
       {/* Analysis Mode Selection */}
       <div className="bg-white rounded-lg border border-gray-200 p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">Analysis Method</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">Choose analysis mode</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           
           {/* LLM Analysis Option */}
@@ -66,9 +65,9 @@ const FileUpload = ({ onUpload, isLoading = false, apiHealth = null }) => {
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900">AI-Powered Analysis</h4>
+                <h4 className="font-medium text-gray-900">VitaScan AI</h4>
                 <p className="text-sm text-gray-600">
-                  Advanced LLM with medical knowledge base
+                  Generative analysis with medical context
                 </p>
                 {apiHealth?.analyzers?.llm === 'needs_api_key' && (
                   <p className="text-xs text-amber-600 mt-1">
@@ -102,9 +101,9 @@ const FileUpload = ({ onUpload, isLoading = false, apiHealth = null }) => {
                 <Cpu className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900">Rule-Based Analysis</h4>
+                <h4 className="font-medium text-gray-900">Standard Analysis</h4>
                 <p className="text-sm text-gray-600">
-                  Traditional pattern matching approach
+                  Fast fallback using rule-based interpretation
                 </p>
                 <p className="text-xs text-green-600 mt-1">
                   ✓ Always available
@@ -160,9 +159,9 @@ const FileUpload = ({ onUpload, isLoading = false, apiHealth = null }) => {
               <div className="text-center animate-slide-up">
                 <p className="text-lg font-medium text-gray-900">
                   {isDragActive ? (
-                    isDragReject ? '❌ File type not supported' : '✨ Drop your medical document here'
+                    isDragReject ? '❌ File type not supported' : '✨ Drop your report here'
                   ) : (
-                    '📄 Upload Medical Document'
+                    '📄 Upload medical document'
                   )}
                 </p>
                 

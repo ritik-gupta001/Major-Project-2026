@@ -13,7 +13,7 @@ export const useTheme = () => {
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check localStorage for saved theme preference
-    const savedTheme = localStorage.getItem('medisure-theme');
+    const savedTheme = localStorage.getItem('vitascan-theme');
     if (savedTheme) {
       return savedTheme === 'dark';
     }
@@ -23,7 +23,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     // Save theme preference to localStorage
-    localStorage.setItem('medisure-theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem('vitascan-theme', isDarkMode ? 'dark' : 'light');
     
     // Apply theme to document root
     if (isDarkMode) {
@@ -43,35 +43,37 @@ export const ThemeProvider = ({ children }) => {
     colors: {
       // Light mode colors
       light: {
-        primary: '#3b82f6',
-        secondary: '#10b981',
-        background: '#ffffff',
-        surface: '#f8fafc',
-        surfaceVariant: '#f1f5f9',
+        primary: '#0f766e',
+        secondary: '#14b8a6',
+        accent: '#2563eb',
+        background: '#f8fafc',
+        surface: '#ffffff',
+        surfaceVariant: '#f0fdfa',
         text: {
-          primary: '#1f2937',
-          secondary: '#6b7280',
-          accent: '#3b82f6'
+          primary: '#0f172a',
+          secondary: '#475569',
+          accent: '#0f766e'
         },
-        border: '#e5e7eb',
-        shadow: 'rgba(0, 0, 0, 0.1)',
-        gradient: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)'
+        border: '#dbe4ea',
+        shadow: 'rgba(15, 23, 42, 0.08)',
+        gradient: 'linear-gradient(135deg, #f8fafc 0%, #ecfeff 45%, #eef2ff 100%)'
       },
       // Dark mode colors
       dark: {
-        primary: '#60a5fa',
-        secondary: '#34d399',
-        background: '#111827',
-        surface: '#1f2937',
-        surfaceVariant: '#374151',
+        primary: '#2dd4bf',
+        secondary: '#60a5fa',
+        accent: '#a78bfa',
+        background: '#0b1220',
+        surface: '#111827',
+        surfaceVariant: '#172033',
         text: {
-          primary: '#f9fafb',
-          secondary: '#d1d5db',
-          accent: '#60a5fa'
+          primary: '#f8fafc',
+          secondary: '#cbd5e1',
+          accent: '#2dd4bf'
         },
-        border: '#4b5563',
-        shadow: 'rgba(0, 0, 0, 0.3)',
-        gradient: 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%)'
+        border: '#243244',
+        shadow: 'rgba(0, 0, 0, 0.35)',
+        gradient: 'linear-gradient(135deg, #0b1220 0%, #111827 45%, #172033 100%)'
       }
     }
   };

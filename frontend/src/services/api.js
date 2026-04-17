@@ -5,7 +5,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || (
   process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000'
 );
 
-class MediSureAPIService {
+class VitaScanAPIService {
   constructor() {
     this.apiClient = axios.create({
       baseURL: API_BASE_URL,
@@ -14,8 +14,6 @@ class MediSureAPIService {
         'Content-Type': 'application/json',
       },
     });
-    
-    console.log('✅ API configured for:', API_BASE_URL || 'same origin');
   }
 
   async analyzeDocument(file, useLLM = true) {
@@ -127,5 +125,5 @@ class MediSureAPIService {
   }
 }
 
-const apiService = new MediSureAPIService();
+const apiService = new VitaScanAPIService();
 export default apiService;

@@ -104,7 +104,7 @@ class IntelligentLLMAnalyzer:
         self._initialize_openai()
         
         # Medical AI system prompt
-        self.system_prompt = """You are MediSure AI, an advanced medical AI assistant designed to help analyze medical documents and provide healthcare insights.
+        self.system_prompt = """You are VitaScan AI, an advanced medical AI assistant designed to help analyze medical documents and provide healthcare insights.
 
 IMPORTANT GUIDELINES:
 - Always emphasize that you provide informational support, not medical diagnosis
@@ -113,6 +113,10 @@ IMPORTANT GUIDELINES:
 - Use medical terminology appropriately while remaining accessible
 - Highlight any concerning findings that may need immediate attention
 - Provide evidence-based recommendations when possible
+    - Do not invent values, diagnoses, symptoms, or findings that are not explicitly supported by the provided text
+    - If a detail is missing or unclear, say "not stated" or "insufficient information" instead of guessing
+    - Separate observed facts from interpretation
+    - Prefer conservative, evidence-based wording over speculation
 
 Your expertise includes:
 - Medical document analysis and interpretation
@@ -201,10 +205,13 @@ Always maintain professional medical ethics and patient safety as top priorities
             return self._create_fallback_analysis(document_text)
         
         try:
-            # Use old-style openai module API to avoid Client class issues
-            logger.info("🔧 Configuring OpenAI with old-style API...")
-            import openai
-            openai.api_key = api_key
+            logger.info("🔧 Configuring OpenAI client...")
+            if self.openai_client is None:
+                self._initialize_openai()
+
+            if self.openai_client is None:
+                raise RuntimeError("OpenAI client could not be initialized")
+
             logger.info("✅ OpenAI API key configured")
             
             # Get relevant medical context
@@ -213,7 +220,13 @@ Always maintain professional medical ethics and patient safety as top priorities
             
             # Create comprehensive analysis prompt
             analysis_prompt = f"""
-Analyze the following medical document comprehensively:
+Analyze the following medical document conservatively and only use evidence from the text.
+
+Rules:
+- Do not hallucinate or infer unsupported diagnoses
+- Do not add symptoms, measurements, or conditions unless explicitly present in the document
+- If the document is incomplete, say so clearly
+- Use "not stated" or empty arrays when information is unavailable
 
 MEDICAL CONTEXT:
 {medical_context}
@@ -223,12 +236,12 @@ DOCUMENT TO ANALYZE:
 
 Please provide a detailed medical analysis in JSON format with these exact fields:
 {{
-    "summary": "Brief overview of the document and key findings",
+    "summary": "Brief overview strictly supported by the document",
     "findings": [
         {{
             "description": "Name of the finding/test/measurement",
             "value": "Measured or observed value",
-            "interpretation": "Clinical interpretation and significance",
+            "interpretation": "Clinical interpretation grounded in the text",
             "severity": "normal/mild/moderate/severe/critical"
         }}
     ],
@@ -251,16 +264,29 @@ Please provide a detailed medical analysis in JSON format with these exact field
     ]
 }}"""
 
-            # Get AI analysis using old-style API
-            response = openai.ChatCompletion.create(
-                model="gpt-4o-mini",  # Use the configured model
-                messages=[
-                    {"role": "system", "content": self.system_prompt},
-                    {"role": "user", "content": analysis_prompt}
-                ],
-                max_tokens=1500,
-                temperature=0.1
-            )
+            # Get AI analysis using the supported client API
+            if hasattr(self.openai_client, "chat") and hasattr(self.openai_client.chat, "completions"):
+                response = self.openai_client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {"role": "system", "content": self.system_prompt},
+                        {"role": "user", "content": analysis_prompt}
+                    ],
+                    max_tokens=1500,
+                    temperature=0.0
+                )
+            else:
+                import openai
+                openai.api_key = api_key
+                response = openai.ChatCompletion.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {"role": "system", "content": self.system_prompt},
+                        {"role": "user", "content": analysis_prompt}
+                    ],
+                    max_tokens=1500,
+                    temperature=0.0
+                )
             
             analysis_text = response.choices[0].message.content
             
@@ -341,6 +367,8 @@ Please provide a helpful, accurate response about this medical question. Remembe
 3. Be empathetic and supportive
 4. Explain medical concepts in understandable terms
 5. Highlight any red flags that need immediate medical attention
+6. Do not guess or fabricate facts not present in the question or context
+7. If the answer cannot be determined from the provided information, say that clearly
 """
 
             # Get AI response
@@ -351,7 +379,7 @@ Please provide a helpful, accurate response about this medical question. Remembe
                     {"role": "user", "content": chat_prompt}
                 ],
                 max_tokens=500,
-                temperature=0.2
+                temperature=0.0
             )
             
             ai_response = response.choices[0].message.content
@@ -359,7 +387,7 @@ Please provide a helpful, accurate response about this medical question. Remembe
             return {
                 "response": ai_response,
                 "sources": ["Medical knowledge base", "Clinical guidelines"],
-                "conversation_id": f"medisure_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+                "conversation_id": f"vitascan_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
                 "timestamp": datetime.now().isoformat(),
                 "ai_powered": True,
                 "confidence": 95
@@ -378,7 +406,8 @@ Please provide a helpful, accurate response about this medical question. Remembe
         
         try:
             insights_prompt = f"""
-Based on the following medical analysis, provide personalized health insights:
+Based on the following medical analysis, provide personalized health insights.
+Only use the provided analysis data. Do not infer extra conditions or make up trends.
 
 Analysis Summary: {analysis_data.get('summary', 'Medical analysis completed')}
 Key Findings: {analysis_data.get('findings', [])}
@@ -401,7 +430,7 @@ Please provide specific insights in JSON format:
                     {"role": "user", "content": insights_prompt}
                 ],
                 max_tokens=800,
-                temperature=0.1
+                temperature=0.0
             )
             
             insights_text = response.choices[0].message.content
@@ -462,7 +491,7 @@ Please provide specific insights in JSON format:
     def _create_fallback_chat_response(self, message: str, error: str = None) -> Dict[str, Any]:
         """Create fallback chat response when AI is unavailable"""
         return {
-            "response": f"Hello! I'm MediSure AI. Currently, my advanced AI features require API key configuration. Please set up your OPENAI_API_KEY to enable intelligent medical conversations. {f'Error: {error}' if error else ''}\n\nFor now, I recommend consulting with healthcare professionals for medical questions.",
+            "response": f"Hello! I'm VitaScan AI. Currently, my advanced AI features require API key configuration. Please set up your OPENAI_API_KEY to enable intelligent medical conversations. {f'Error: {error}' if error else ''}\n\nFor now, I recommend consulting with healthcare professionals for medical questions.",
             "sources": [],
             "conversation_id": f"fallback_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
             "timestamp": datetime.now().isoformat(),

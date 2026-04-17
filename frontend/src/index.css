@@ -4,26 +4,26 @@
 
 /* CSS Variables for Theme */
 :root {
-  --primary-color: #14b8a6;
-  --secondary-color: #10b981;
-  --background-color: #ffffff;
-  --surface-color: #f8fafc;
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --border-color: #e5e7eb;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --primary-color: #0f766e;
+  --secondary-color: #14b8a6;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: #dbe4ea;
+  --shadow-color: rgba(15, 23, 42, 0.08);
 }
 
 /* Dark mode variables */
 html.dark {
   --primary-color: #2dd4bf;
-  --secondary-color: #34d399;
-  --background-color: #111827;
-  --surface-color: #1f2937;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --border-color: #4b5563;
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  --secondary-color: #60a5fa;
+  --background-color: #0b1220;
+  --surface-color: #111827;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #243244;
+  --shadow-color: rgba(0, 0, 0, 0.35);
 }
 
 /* Theme transitions */
@@ -33,7 +33,7 @@ html.dark {
 
 /* Custom styles for medical interface */
 .medical-card {
-  @apply bg-white rounded-lg shadow-lg border border-medical-200 p-6;
+  @apply bg-white rounded-2xl shadow-lg border border-medical-200 p-6;
 }
 
 .risk-indicator {
@@ -53,7 +53,7 @@ html.dark {
 }
 
 .upload-zone {
-  @apply border-2 border-dashed border-medical-300 rounded-lg p-6 text-center hover:border-medical-500 transition-colors;
+  @apply border-2 border-dashed border-medical-300 rounded-2xl p-6 text-center hover:border-medical-500 transition-colors bg-white/80 backdrop-blur;
 }
 
 .upload-zone.active {
@@ -69,7 +69,7 @@ html.dark {
 }
 
 .chat-bot {
-  @apply bg-gray-100 text-gray-900 mr-auto;
+  @apply bg-slate-100 text-slate-900 mr-auto;
 }
 
 /* Loading animations */

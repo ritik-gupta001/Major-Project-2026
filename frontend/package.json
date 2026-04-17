@@ -1,7 +1,7 @@
 {
-  "name": "medisure-ai-frontend",
+  "name": "vitascan-ai-frontend",
   "version": "1.0.0",
-  "description": "MediSure AI - Medical Analysis Frontend",
+  "description": "VitaScan AI - Medical Analysis Frontend",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.17",
