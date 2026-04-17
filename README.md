@@ -402,6 +402,42 @@ python app.py
 cd frontend && npm start
 ```
 
+## ☁️ Free Deployment (No Oracle)
+
+This project can be deployed for free using:
+
+- **Backend**: Render (Free Web Service)
+- **Frontend**: Netlify (Free Starter Plan)
+
+### Backend on Render
+
+1. Push code to GitHub.
+2. In Render, create a new **Web Service** from this repo.
+3. Configure:
+  - **Root Directory**: `.`
+  - **Build Command**: `pip install -r requirements.txt`
+  - **Start Command**: `python -m uvicorn app:app --host 0.0.0.0 --port $PORT`
+4. Add environment variable:
+  - `OPENAI_API_KEY=your-key`
+5. Deploy and copy the backend URL.
+
+### Frontend on Netlify
+
+1. In Netlify, create a new site from your GitHub repository.
+2. Configure build settings:
+  - **Base directory**: `frontend`
+  - **Build command**: `npm run build`
+  - **Publish directory**: `build`
+3. Add environment variable:
+  - `REACT_APP_API_URL=https://your-render-backend-url.onrender.com`
+4. Deploy.
+
+### Notes
+
+- Render free tier may sleep when inactive.
+- If backend URL changes, update `REACT_APP_API_URL` and redeploy frontend.
+- `frontend/netlify.toml` and `frontend/public/_redirects` are already included for SPA routing.
+
 ---
 
 ## 🤝 Contributing
