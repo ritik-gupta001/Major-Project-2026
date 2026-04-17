@@ -1,5 +1,11 @@
 # 🏥 VitaScan AI
 
+
+
+https://github.com/user-attachments/assets/ecd53228-931d-4bac-90ac-eab0a4515d05
+
+
+
 **Advanced AI-Powered Medical Report Analysis Platform**
 
 A comprehensive medical document analysis system that leverages OpenAI GPT-4o-mini and advanced AI to transform medical reports into actionable insights. Features dynamic risk calculation, hospital-grade animations, and a beautiful teal-themed interface.
